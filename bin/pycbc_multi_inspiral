@@ -21,6 +21,7 @@ Find multi-detector gravitational wave triggers and calculate the
 coherent SNRs and related statistics.
 """
 
+# Initialize packages
 import logging
 import time
 from collections import defaultdict
@@ -36,6 +37,8 @@ from pycbc.types import TimeSeries, zeros, float32, complex64
 from pycbc.types import MultiDetOptionAction
 from pycbc.vetoes import sgchisq
 time_init = time.time()
+
+# Command line parsing
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("-V", "--verbose", action="store_true",
                     help="print extra debugging information",
@@ -94,7 +97,7 @@ parser.add_argument("--user-tag", type=str, metavar="TAG",
                     help="This is used to identify FULL_DATA jobs for "
                          "compatibility with pipedown post-processing. Option "
                          "will be removed when no longer needed.")
-# Arguments added for the coherent stuff
+# Arguments added for the coherent part
 parser.add_argument("--ra", type=float, help="Right ascension, in radians")
 parser.add_argument("--dec", type=float, help="Declination, in radians")
 parser.add_argument("--coinc-threshold", type=float, default=0.0,
@@ -121,6 +124,7 @@ parser.add_argument("--num-slides", type=int, default=0,
                     help="Number of time slides to perform.")
 parser.add_argument("--slide-shift", type=float, default=1.,
                     help="Size of each time slide shift.")
+
 # Add options groups
 strain.insert_strain_option_group_multi_ifo(parser)
 strain.StrainSegments.insert_segment_option_group_multi_ifo(parser)
